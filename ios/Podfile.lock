@@ -1,15 +1,42 @@
 PODS:
+  - apivideo_live_stream (0.0.1):
+    - ApiVideoLiveStream (= 1.3.3)
+    - Flutter
+  - ApiVideoLiveStream (1.3.3):
+    - HaishinKit (= 1.4.2)
   - Flutter (1.0.0)
+  - HaishinKit (1.4.2):
+    - Logboard (~> 2.3.0)
+  - Logboard (2.3.1)
+  - native_device_orientation (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
+  - apivideo_live_stream (from `.symlinks/plugins/apivideo_live_stream/ios`)
   - Flutter (from `Flutter`)
+  - native_device_orientation (from `.symlinks/plugins/native_device_orientation/ios`)
+
+SPEC REPOS:
+  trunk:
+    - ApiVideoLiveStream
+    - HaishinKit
+    - Logboard
 
 EXTERNAL SOURCES:
+  apivideo_live_stream:
+    :path: ".symlinks/plugins/apivideo_live_stream/ios"
   Flutter:
     :path: Flutter
+  native_device_orientation:
+    :path: ".symlinks/plugins/native_device_orientation/ios"
 
 SPEC CHECKSUMS:
+  apivideo_live_stream: 6e418549d39066f38762aaea829cb9d6035bec3a
+  ApiVideoLiveStream: 667de27c8e017c67b9f5c183051b52b766b6d321
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  HaishinKit: bd4544ad56d567ec951490ccc49c9d70810a7c67
+  Logboard: 3d98bb85de6a36b255ab637e8178eb5671c5c3a6
+  native_device_orientation: 3b4cfc9565a7b879cc4fde282b3e27745e852d0d
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
 
