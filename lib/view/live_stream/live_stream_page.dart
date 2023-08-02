@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:apivideo_live_stream/apivideo_live_stream.dart';
+import 'package:demo_live_stream/common/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class LiveStreamPage extends StatefulWidget {
   const LiveStreamPage({super.key});
@@ -15,7 +17,11 @@ class _LiveStreamPageState extends State<LiveStreamPage> {
   // Create data.
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late final ApiVideoLiveStreamController? _liveStreamController;
-  bool isLoading = true;
+
+  // bool value.
+  bool _isLoading = true;
+  bool _isStreaming = false;
+  bool _isMicroOff = false;
 
   @override
   void initState() {
@@ -23,6 +29,12 @@ class _LiveStreamPageState extends State<LiveStreamPage> {
     //  Initialize camera controller.
     _initCameraController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _liveStreamController?.dispose();
+    super.dispose();
   }
 
   ///
@@ -53,7 +65,7 @@ class _LiveStreamPageState extends State<LiveStreamPage> {
       log('Init live steam controller error at $e}');
     });
 
-    isLoading = false;
+    _isLoading = false;
     if (!mounted) return;
     setState(() {});
   }
@@ -61,7 +73,95 @@ class _LiveStreamPageState extends State<LiveStreamPage> {
   ///
   /// Start video stream.
   ///
-  Future<void> _startVideoStream() async {}
+  Future<void> _startVideoStream() async {
+    if (_liveStreamController == null) {
+      log('Error: create a camera controller first.');
+      return;
+    }
+
+    // Start live stream.
+    await _liveStreamController!
+        .startStreaming(streamKey: AppConstants.streamKey, url: AppConstants.rtmpUrl)
+        .catchError((error) {
+      if (error is PlatformException) {
+        log("Start live stream failed to start stream: ${error.message}");
+      } else {
+        log("Start live stream failed to start stream: $error");
+      }
+    });
+
+    // Set flag stream is true.
+    _setFlagsStream(isStreaming: true);
+  }
+
+  ///
+  /// Stop live stream.
+  ///
+  Future<void> _stopVideoStream() async {
+    if (_liveStreamController == null) {
+      log('Error: create a camera controller first.');
+      return;
+    }
+
+    await _liveStreamController!.stopStreaming().catchError((error) {
+      if (error is PlatformException) {
+        log("Stop live stream failed to start stream: ${error.message}");
+      } else {
+        log("Stop live stream failed to start stream: $error");
+      }
+    });
+
+    // Set flag stream is false.
+    _setFlagsStream(isStreaming: false);
+  }
+
+  ///
+  /// Switch camera.
+  ///
+  Future<void> _switchCamera() async {
+    if (_liveStreamController == null) {
+      log('Error: create a camera controller first.');
+      return;
+    }
+
+    await _liveStreamController!.switchCamera();
+
+    if (!mounted) return;
+    setState(() {});
+  }
+
+  ///
+  /// Toggle microphone.
+  ///
+  Future<void> _toggleMicrophone() async {
+    if (_liveStreamController == null) {
+      log('Error: create a camera controller first.');
+      return;
+    }
+
+    await _liveStreamController!.toggleMute();
+
+    // Set flags micro.
+    _setFlagsMicro();
+  }
+
+  ///
+  /// Set flags stream.
+  ///
+  void _setFlagsStream({required bool isStreaming}) {
+    _isStreaming = isStreaming;
+    if (!mounted) return;
+    setState(() {});
+  }
+
+  ///
+  /// Set flags micro.
+  ///
+  void _setFlagsMicro() {
+    _isMicroOff = !_isMicroOff;
+    if (!mounted) return;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +176,7 @@ class _LiveStreamPageState extends State<LiveStreamPage> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: isLoading
+            child: _isLoading
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
@@ -95,31 +195,80 @@ class _LiveStreamPageState extends State<LiveStreamPage> {
                           ),
                         )
                       else
-                        Expanded(
-                          child: ApiVideoCameraPreview(
-                            controller: _liveStreamController!,
-                          ),
+                        ApiVideoCameraPreview(
+                          controller: _liveStreamController!,
                         ),
                     ],
                   ),
           ),
           Positioned.fill(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 40),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Column(
+                          children: [
+                            IconButton(
+                              padding: const EdgeInsets.only(bottom: 20),
+                              icon: const Icon(
+                                Icons.cameraswitch,
+                                color: Colors.white,
+                                size: 40,
+                              ),
+                              color: Colors.white,
+                              onPressed: () async {
+                                await _switchCamera();
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                _isMicroOff ? Icons.mic_off : Icons.mic,
+                                color: Colors.white,
+                                size: 40,
+                              ),
+                              color: Colors.white,
+                              onPressed: () async {
+                                await _toggleMicrophone();
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      //
                       // Start/Stop stream.
                       MaterialButton(
-                        color: Colors.red,
-                        onPressed: () {
-                          _startVideoStream();
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                        color: _isStreaming ? Colors.red : Colors.green,
+                        onPressed: () async {
+                          if (_isStreaming) {
+                            await _stopVideoStream();
+                          } else {
+                            await _startVideoStream();
+                          }
                         },
-                        child: const Text(
-                          'Start stream',
-                          style: TextStyle(color: Colors.white),
+                        child: Row(
+                          children: [
+                            Icon(
+                              _isStreaming ? Icons.pause : Icons.play_arrow,
+                              color: Colors.white,
+                            ),
+                            Text(
+                              _isStreaming ? 'Stop live' : 'Start live',
+                              style: const TextStyle(color: Colors.white, fontSize: 16),
+                            ),
+                          ],
                         ),
                       ),
                     ],
