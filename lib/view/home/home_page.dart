@@ -1,4 +1,5 @@
 import 'package:demo_live_stream/view/live_stream/live_stream_page.dart';
+import 'package:demo_live_stream/view/watch_live_stream/watch_live_stream_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,7 +41,11 @@ class _HomePageState extends State<HomePage> {
             MaterialButton(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               color: Colors.orange,
-              onPressed: () {},
+              onPressed: () {
+                //
+                // Go to view live stream page.
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const WatchLiveStreamPage()));
+              },
               child: const Text(
                 'Watch live stream',
                 style: TextStyle(color: Colors.white),

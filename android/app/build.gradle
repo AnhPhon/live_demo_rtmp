@@ -58,12 +58,16 @@ android {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
+            shrinkResources false
         }
     }
 
     packagingOptions {
         exclude 'project.clj'
+        pickFirst 'lib/**/libc++_shared.so'
     }
 }
 
