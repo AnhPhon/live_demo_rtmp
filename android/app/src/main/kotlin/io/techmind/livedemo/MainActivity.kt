@@ -1,4 +1,4 @@
-package com.example.demo_live_stream
+package io.techmind.livedemo
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,6 +1,7 @@
 name: demo_live_stream
 description: A new Flutter project.
 publish_to: "none"
+# Flutter version: 3.7.12.
 
 version: 1.0.0+1
 
@@ -8,6 +9,9 @@ environment:
   sdk: ">=2.19.6 <3.0.0"
 
 dependencies:
+  flutter_localizations:
+    sdk: flutter
+
   flutter:
     sdk: flutter
 
@@ -19,6 +23,45 @@ dependencies:
 
   # View live stream.
   flutter_vlc_player: ^7.2.0
+
+  # Display image.
+  flutter_svg: ^2.0.0
+
+  # Set size.
+  flutter_screenutil: ^5.7.0
+
+  # Show image.
+  cached_network_image: ^3.2.3
+
+  # Manager something live singleton.
+  get_it: ^7.6.0
+
+  # Save data local.
+  shared_preferences: ^2.2.0
+
+  # Bottom bar.
+  google_nav_bar: ^5.0.6
+
+  # Keep screen alive.
+  wakelock: ^0.6.2
+
+  # Show toast.
+  fluttertoast: ^8.2.2
+
+  # Animated gift.
+  lottie: ^2.3.2
+
+  # Socket client.
+  socket_io_client: ^2.0.3+1
+
+  # Copy.
+  clipboard: ^0.1.3
+
+  # Share.
+  share_plus: ^6.3.1
+
+  # Launcher link.
+  url_launcher: ^6.1.10
 
 dev_dependencies:
   flutter_test:
@@ -33,7 +76,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icons/logo-app.jpg"
+  image_path: "assets/logo/logo-app.jpg"
   min_sdk_android: 21 # android min sdk min:16, default 21
 
 flutter:
@@ -41,3 +84,17 @@ flutter:
 
   assets:
     - assets/icons/
+    - assets/images/
+    - assets/logo/
+    - assets/common_icon/
+
+  fonts:
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/nunito/Nunito-Regular.ttf
+        - asset: assets/fonts/nunito/Nunito-Italic.ttf
+        - asset: assets/fonts/nunito/Nunito-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/nunito/Nunito-Bold.ttf
+          weight: 700
+

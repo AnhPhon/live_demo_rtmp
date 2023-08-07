@@ -8,25 +8,56 @@ PODS:
   - flutter_vlc_player (3.0.3):
     - Flutter
     - MobileVLCKit (~> 3.5.1)
+  - fluttertoast (0.0.2):
+    - Flutter
+    - Toast
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - HaishinKit (1.5.2):
     - Logboard (~> 2.3.1)
   - Logboard (2.3.1)
   - MobileVLCKit (3.5.1)
   - native_device_orientation (0.0.1):
     - Flutter
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - share_plus (0.0.1):
+    - Flutter
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - sqflite (0.0.3):
+    - Flutter
+    - FMDB (>= 2.7.5)
+  - Toast (4.0.0)
+  - url_launcher_ios (0.0.1):
+    - Flutter
+  - wakelock (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - apivideo_live_stream (from `.symlinks/plugins/apivideo_live_stream/ios`)
   - Flutter (from `Flutter`)
   - flutter_vlc_player (from `.symlinks/plugins/flutter_vlc_player/ios`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - native_device_orientation (from `.symlinks/plugins/native_device_orientation/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
+  - share_plus (from `.symlinks/plugins/share_plus/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+  - wakelock (from `.symlinks/plugins/wakelock/ios`)
 
 SPEC REPOS:
   trunk:
     - ApiVideoLiveStream
+    - FMDB
     - HaishinKit
     - Logboard
     - MobileVLCKit
+    - Toast
 
 EXTERNAL SOURCES:
   apivideo_live_stream:
@@ -35,18 +66,41 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_vlc_player:
     :path: ".symlinks/plugins/flutter_vlc_player/ios"
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
   native_device_orientation:
     :path: ".symlinks/plugins/native_device_orientation/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/ios"
+  share_plus:
+    :path: ".symlinks/plugins/share_plus/ios"
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
+  wakelock:
+    :path: ".symlinks/plugins/wakelock/ios"
 
 SPEC CHECKSUMS:
   apivideo_live_stream: 0f091f1b5ef17d6de184c5dd4d0b3cac1241bc00
   ApiVideoLiveStream: 7e17b84f3b900d3d06ebdf96834ef0dccf68fd45
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_vlc_player: e321a4dcfaa0b9018a644791231e3e24e73d2fc7
+  fluttertoast: fafc4fa4d01a6a9e4f772ecd190ffa525e9e2d9c
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HaishinKit: b42a0e86766957a1882c0f61f0ebf0111d581402
   Logboard: 3d98bb85de6a36b255ab637e8178eb5671c5c3a6
   MobileVLCKit: 144d5f565512d1147d63b0fa1379231b3fd66535
   native_device_orientation: 3b4cfc9565a7b879cc4fde282b3e27745e852d0d
+  path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
+  share_plus: 056a1e8ac890df3e33cb503afffaf1e9b4fbae68
+  shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
+  sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
+  wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
 

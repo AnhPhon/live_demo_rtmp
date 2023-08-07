@@ -1,5 +1,22 @@
+import 'package:demo_live_stream/exports/exports_path.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 class AppConstants {
-  static const String streamKey = "phone_flutter_dev";
-  static const String rtmpUrl = "rtmp://103.21.221.175:1935/live";
-  static const String urlVideoPlayBack = "rtmp://103.21.221.175:1935/live/phone_flutter_dev";
+  //
+  // Constants of LocalizationsDelegate
+  static List<LocalizationsDelegate> localizationsDelegates = [
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    DefaultCupertinoLocalizations.delegate,
+  ];
+
+  // Map of gift.
+  static Map<String, String> giftMap = {
+    ImagePaths.giftIcon1: 'assets/icons/gift_1.json',
+    ImagePaths.giftIcon2: 'assets/icons/gift_2.json',
+    ImagePaths.giftIcon3: 'assets/icons/gift_3.json',
+    ImagePaths.giftIcon4: 'assets/icons/gift_4.json',
+  };
 }
