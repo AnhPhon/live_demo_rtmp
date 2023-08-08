@@ -30,7 +30,8 @@ class _DashBoardState extends State<DashBoard> {
         padding: IZISizeUtil.setEdgeInsetsOnly(
           left: IZISizeUtil.SPACE_5X,
           right: IZISizeUtil.SPACE_5X,
-          bottom: IZISizeUtil.SPACE_3X,
+          bottom: IZISizeUtil.SPACE_2X,
+          top: IZISizeUtil.SPACE_2X,
         ),
         child: GNav(
           selectedIndex: _currentIndex,
@@ -50,7 +51,7 @@ class _DashBoardState extends State<DashBoard> {
           activeColor: ColorResources.primary_1,
           iconSize: 25,
           tabBackgroundColor: ColorResources.white,
-          padding: IZISizeUtil.setEdgeInsetsSymmetric(horizontal: IZISizeUtil.SPACE_3X, vertical: IZISizeUtil.SPACE_2X),
+          padding: IZISizeUtil.setEdgeInsetsSymmetric(horizontal: IZISizeUtil.SPACE_3X, vertical: IZISizeUtil.SPACE_1X),
           tabs: [
             GButton(
               iconSize: 25,

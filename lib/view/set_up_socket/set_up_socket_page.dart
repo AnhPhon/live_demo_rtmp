@@ -51,7 +51,7 @@ class _SetUpSocketState extends State<SetUpSocket> {
   ///
   /// Initializes the data.
   ///
-  void _initializeTheData() {
+  Future<void> _initializeTheData() async {
     if (!IZIValidate.nullOrEmpty(sl<SharedPreferenceHelper>().getChannelSocket)) {
       _channelSocketController.text = sl<SharedPreferenceHelper>().getChannelSocket!;
     }
@@ -60,7 +60,12 @@ class _SetUpSocketState extends State<SetUpSocket> {
       _socketServerController.text = sl<SharedPreferenceHelper>().getSocketServer!;
 
       if (_socketServerController.text.trim().isNotEmpty) {
-        _connectSocket();
+        await _connectSocket().whenComplete(() {
+          if (_isLoading) {
+            _isLoading = false;
+            setState(() {});
+          }
+        });
       }
     } else {
       _isLoading = false;
