@@ -32,7 +32,7 @@ class _WatchLiveStreamPageState extends State<WatchLiveStreamPage> with TickerPr
   void initState() {
     //
     // Get arguments.
-    _getArguments();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _getArguments());
 
     //  Init animated gift controller.
     _initAnimatedGiftController();
@@ -61,11 +61,9 @@ class _WatchLiveStreamPageState extends State<WatchLiveStreamPage> with TickerPr
   /// Get arguments.
   ///
   Future<void> _getArguments() async {
-    await Future.delayed(const Duration(seconds: 1), () {
-      if (!IZIValidate.nullOrEmpty(ModalRoute.of(context)?.settings.arguments)) {
-        _liveStreamEndpoint = ModalRoute.of(context)?.settings.arguments as String;
-      }
-    });
+    if (!IZIValidate.nullOrEmpty(ModalRoute.of(context)?.settings.arguments)) {
+      _liveStreamEndpoint = ModalRoute.of(context)?.settings.arguments as String;
+    }
 
     //  Initialize the play back live stream.
     _initializePlayBackLiveStream();
@@ -79,7 +77,23 @@ class _WatchLiveStreamPageState extends State<WatchLiveStreamPage> with TickerPr
     //initializing the player
     _videoLiveController = VlcPlayerController.network(
       _liveStreamEndpoint,
-      options: VlcPlayerOptions(),
+      hwAcc: HwAcc.full,
+      options: VlcPlayerOptions(
+        advanced: VlcAdvancedOptions([
+          VlcAdvancedOptions.networkCaching(3000),
+          VlcAdvancedOptions.clockSynchronization(1),
+          VlcAdvancedOptions.liveCaching(3000),
+        ]),
+        http: VlcHttpOptions([
+          VlcHttpOptions.httpReconnect(true),
+        ]),
+        rtp: VlcRtpOptions([
+          VlcRtpOptions.rtpOverRtsp(true),
+        ]),
+        sout: VlcStreamOutputOptions([
+          VlcStreamOutputOptions.soutMuxCaching(3000),
+        ]),
+      ),
     );
 
     _videoLiveController.addOnInitListener(() async {

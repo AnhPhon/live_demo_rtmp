@@ -46,6 +46,9 @@ class _LiveStreamPageState extends State<LiveStreamPage> with TickerProviderStat
     // Initialize camera controller.
     _initCameraController();
 
+    // Get arguments.
+    WidgetsBinding.instance.addPostFrameCallback((_) => _getArguments());
+
     //  Init animated gift controller.
     _initAnimatedGiftController();
 
@@ -133,9 +136,6 @@ class _LiveStreamPageState extends State<LiveStreamPage> with TickerProviderStat
     _isLoading = false;
     if (!mounted) return;
     setState(() {});
-
-    //  Get arguments.
-    _getArguments();
   }
 
   ///
