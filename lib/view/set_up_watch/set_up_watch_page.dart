@@ -59,7 +59,7 @@ class _SetUpWatchState extends State<SetUpWatch> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: const BaseAppBar(
-        title: 'Set up live stream',
+        title: 'Set up watch live',
         leading: SizedBox(),
         backgroundColor: ColorResources.backGround,
       ),
